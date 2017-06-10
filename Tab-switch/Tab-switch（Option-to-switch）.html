@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>标题</title>
+    <style type="text/css">
+        *{
+            margin:0;
+            padding:0;
+        }
+        ul{
+            list-style: none;
+        }
+        .tab{
+            width: 500px;
+            margin: 100px auto;
+            height: 400px;
+            background-color: #b4c7c7;
+        }
+        /*.clearfix:before,*/
+        .clearfix:after{
+            content: '';
+            display: table;
+            clear: both;
+        }
+        /*按钮*/
+        .tab_button{
+            width: 50px;
+            height: 20px;
+            background-color: #bfa;
+            float: left;
+            display: table;
+            /*position: absolute;*/
+            margin: 10px 10px 0 10px;
+            padding: 20px;
+            border:1px solid;
+            cursor: pointer;
+            border-bottom: none;
+        }
+            /*内容*/
+        .tab_content{
+            width: 100%;
+            height: 350px;
+            border: 1px solid;
+            display: none; /*设置内容默认不显示*/
+            background-color: #bfa;
+            /*margin-top: -1px;*/
+            text-align: center;
+            line-height: 350px;
+        }
+    </style>
+</head>
+<body>
+    <div class="tab">
+        <!--按钮    -->
+        <ul class="clearfix tab_outer">
+            <li class="tab_button" id="buttonOne" style="padding-bottom: 22px; margin-bottom: -5px;background-color: #bfa;">选项一</li>
+            <!--style="background-color: #fff;padding-bottom: 6px;margin-bottom: -1px;-->
+            <li class="tab_button">选项二</li>
+            <li class="tab_button">选项三</li>
+            <li class="tab_button">选项四</li>
+        </ul>
+
+        <!--切换区内容-->
+        <div class="tab_content contentOne" id="contentOne" style="display: block;background:skyblue;">111</div>
+
+        <div class="tab_content" style="background:yellow">222</div>
+
+        <div class="tab_content" style="background:pink"> 333</div>
+
+        <div class="tab_content" style="background:green">444</div>
+
+    </div>
+    <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
+    <script>
+        //jQuery设置延迟加载
+        $(function () {
+
+            //jQuery获取按钮点击事件
+            $('.tab_button').click(function () {
+
+                //jQuery设置取消按钮选择的状态
+               $('.tab_button').css({'backgroundColor':'','paddingBottom':'','marginBottom':''});
+                //按钮选中状态。this表示当前的按钮
+                //$(this).css('background','#bfa');  此种css样式时jquery的写法
+               $(this).css({'backgroundColor':'#bfa','marginBottom':'-5px','paddingBottom':'22px'});   //可把css包裹在对象中，用DOM的写法
+
+                //隐藏tab_content
+                $('.tab_content').css('display','');
+
+                //显示tab_content，为tab_content绑定索引。添加指定的索引
+                var i = $(this).index(); //this是DOM的方法，所以转换我jQuery的对象1
+
+                //点击索引为i的显示tab_content... $(".tab_content")[i]位DOM对象获取对应的tab_content
+                 //方法一   $($(".tab_content")[i]).css('display','block');
+                //方法二
+                    $('.tab_content')[i].style.display='block';
+
+            });
+
+        });
+    </script>
+
+</body>
+</html>
